@@ -57,11 +57,9 @@ export default function CommentSection({ comments = [], onAddComment }) {
       <div className="comments-list">
         {comments.map((comment) => (
           <div key={comment.id} className="comment-card">
-            <img
-              src={comment.avatar}
-              alt={comment.author}
-              className="comment-avatar"
-            />
+            <div className="comment-avatar-badge" aria-hidden="true">
+              {comment.author ? comment.author.charAt(0).toUpperCase() : 'U'}
+            </div>
             <div className="comment-content-area">
               <div className="comment-meta">
                 <span className="comment-author-name">{comment.author}</span>

@@ -133,16 +133,6 @@ export default function ArticleReader({
           </div>
         </header>
 
-        {/* Media Hero */}
-        <div className="reader-hero-media">
-          <img
-            src={article.coverImage}
-            alt={article.title}
-            className="reader-hero-img"
-          />
-          <div className="reader-hero-gradient" />
-        </div>
-
         {/* Content Body */}
         <main className="reader-body-content">
           <span className="reader-category">{article.category}</span>
@@ -152,11 +142,6 @@ export default function ArticleReader({
           {/* Author & Meta Row */}
           <div className="reader-meta-profile">
             <div className="author-full">
-              <img
-                src={article.author.avatar}
-                alt={article.author.name}
-                className="author-full-avatar"
-              />
               <div>
                 <div className="author-full-name">{article.author.name}</div>
                 <div className="author-full-role">{article.author.role}</div>

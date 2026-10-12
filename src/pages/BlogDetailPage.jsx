@@ -222,27 +222,12 @@ export default function BlogDetailPage({
 
           {/* Author Strip */}
           <div className="author-strip">
-            <img
-              src={article.author.avatar}
-              alt={article.author.name}
-              className="author-avatar"
-              style={{ width: '44px', height: '44px' }}
-            />
             <div>
               <div style={{ fontWeight: '700', fontSize: '0.95rem' }}>{article.author.name}</div>
               <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>{article.author.role}</div>
             </div>
           </div>
         </header>
-
-        {/* Clean Cover Media Image (No overlays) */}
-        <div className="article-page-cover-wrapper">
-          <img
-            src={article.coverImage}
-            alt={article.title}
-            className="article-page-cover-img"
-          />
-        </div>
 
         {/* Table of Contents */}
         {article.tableOfContents && article.tableOfContents.length > 0 && (
@@ -382,13 +367,6 @@ export default function BlogDetailPage({
                   onClick={() => navigate(`/blog/${rel.slug}`)}
                   style={{ cursor: 'pointer' }}
                 >
-                  <div className="card-media-wrapper" style={{ height: '170px' }}>
-                    <img
-                      src={rel.coverImage}
-                      alt={rel.title}
-                      className="card-cover-img"
-                    />
-                  </div>
                   <div className="card-body">
                     <div className="card-meta-top">
                       <span className="card-category-inline">{rel.category}</span>
