@@ -4,20 +4,18 @@ import {
   ArrowLeft,
   Bookmark,
   Share2,
-  Heart,
   Check,
   Copy,
   Clock,
   Eye,
   CheckCircle2
 } from 'lucide-react';
-import Navbar from '../components/Navbar';
 import CommentSection from '../components/CommentSection';
 import { blogService } from '../api/blogService';
 
 export default function BlogDetailPage({
-  theme,
-  toggleTheme,
+  theme: _theme,
+  toggleTheme: _toggleTheme,
   bookmarks,
   onToggleBookmark,
   onShowToast,
@@ -30,7 +28,6 @@ export default function BlogDetailPage({
   const [loading, setLoading] = useState(true);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [copiedCodeIndex, setCopiedCodeIndex] = useState(null);
-  const [burstParticle, setBurstParticle] = useState(false);
 
   // Scroll to top on slug change
   useEffect(() => {
@@ -79,14 +76,6 @@ export default function BlogDetailPage({
     }
   };
 
-  const handleClap = async () => {
-    if (!article) return;
-    const res = await blogService.clapArticle(article.id);
-    setArticle(prev => ({ ...prev, claps: res.claps }));
-    setBurstParticle(true);
-    setTimeout(() => setBurstParticle(false), 900);
-  };
-
   const handleAddComment = async (commentData) => {
     if (!article) return;
     const newComment = await blogService.addComment(article.id, commentData);
@@ -100,13 +89,6 @@ export default function BlogDetailPage({
   if (loading) {
     return (
       <div className="app-container">
-        <Navbar
-          theme={theme}
-          toggleTheme={toggleTheme}
-          bookmarksCount={bookmarks.length}
-          showOnlyBookmarks={false}
-          setShowOnlyBookmarks={() => navigate('/')}
-        />
         <div style={{ textAlign: 'center', padding: '6rem 2rem', color: 'var(--text-muted)' }}>
           <p>Loading full article...</p>
         </div>
@@ -117,13 +99,6 @@ export default function BlogDetailPage({
   if (!article) {
     return (
       <div className="app-container">
-        <Navbar
-          theme={theme}
-          toggleTheme={toggleTheme}
-          bookmarksCount={bookmarks.length}
-          showOnlyBookmarks={false}
-          setShowOnlyBookmarks={() => navigate('/')}
-        />
         <div className="empty-state" style={{ margin: '4rem auto', maxWidth: '600px' }}>
           <h2 style={{ marginBottom: '1rem' }}>Article Not Found</h2>
           <p style={{ color: 'var(--text-muted)', marginBottom: '2rem' }}>
@@ -154,15 +129,6 @@ export default function BlogDetailPage({
           zIndex: 1000,
         }}
         aria-hidden="true"
-      />
-
-      {/* Top Navbar */}
-      <Navbar
-        theme={theme}
-        toggleTheme={toggleTheme}
-        bookmarksCount={bookmarks.length}
-        showOnlyBookmarks={false}
-        setShowOnlyBookmarks={() => navigate('/')}
       />
 
       {/* Dedicated Full Page Article Wrapper */}
@@ -322,30 +288,6 @@ export default function BlogDetailPage({
             return null;
           })}
         </main>
-
-        {/* Clapper / Reactions Bar */}
-        <div className="reader-engagement-bar" style={{ marginTop: '3.5rem' }}>
-          <button
-            className="clap-button"
-            onClick={handleClap}
-            aria-label={`Clap for this article, current claps: ${article.claps}`}
-          >
-            <Heart size={20} fill="currentColor" />
-            <span>{article.claps} Reactions</span>
-            {burstParticle && (
-              <span className="clap-burst-particle">+1</span>
-            )}
-          </button>
-
-          <button
-            className="nav-btn"
-            onClick={handleShare}
-            style={{ padding: '0.65rem 1.2rem' }}
-          >
-            <Share2 size={15} />
-            <span>Share Article</span>
-          </button>
-        </div>
 
         {/* Discussion / Comments Section */}
         <CommentSection

@@ -3,7 +3,6 @@ import {
   ArrowLeft,
   Bookmark,
   Share2,
-  Heart,
   Check,
   Copy,
   Clock,
@@ -19,13 +18,12 @@ export default function ArticleReader({
   onClose,
   isBookmarked,
   onToggleBookmark,
-  onClap,
+  onClap: _onClap,
   onAddComment,
   onShowToast,
 }) {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [copiedCodeIndex, setCopiedCodeIndex] = useState(null);
-  const [burstParticle, setBurstParticle] = useState(false);
   const readerRef = useRef(null);
 
   // Track scroll progress within reader
@@ -66,13 +64,6 @@ export default function ArticleReader({
       navigator.clipboard.writeText(window.location.href);
       onShowToast('Article link copied to clipboard');
     }
-  };
-
-  // Clap burst animation
-  const handleClapClick = () => {
-    onClap(article.id);
-    setBurstParticle(true);
-    setTimeout(() => setBurstParticle(false), 900);
   };
 
   return (
@@ -257,34 +248,6 @@ export default function ArticleReader({
               return null;
             })}
           </article>
-
-          {/* Engagement Reaction Bar */}
-          <div className="reader-engagement-bar">
-            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-              <button
-                className="clap-button"
-                onClick={handleClapClick}
-                aria-label={`Clap for this article, current claps: ${article.claps}`}
-              >
-                <Heart size={20} fill="currentColor" />
-                <span>{article.claps} Reactions</span>
-                {burstParticle && (
-                  <span className="clap-burst-particle">+1</span>
-                )}
-              </button>
-            </div>
-
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-              <button
-                className="nav-btn"
-                onClick={handleShare}
-                style={{ padding: '0.65rem 1.1rem' }}
-              >
-                <Share2 size={15} />
-                <span>Share Article</span>
-              </button>
-            </div>
-          </div>
 
           {/* Interactive Comments Section */}
           <CommentSection
