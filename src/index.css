@@ -1,0 +1,7 @@
+@import './styles/blog.css';
+
+/* Root app container reset */
+#root {
+  min-height: 100vh;
+  width: 100%;
+}
