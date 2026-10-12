@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Bookmark, Clock, Eye, Heart } from 'lucide-react';
+import { Bookmark, Eye, Heart } from 'lucide-react';
 
 export default function BlogCard({
   blog,
@@ -28,17 +28,6 @@ export default function BlogCard({
       aria-label={`Article: ${blog.title}`}
     >
       <div className="card-body">
-        <div className="card-meta-top">
-          <span className="card-category-inline">{blog.category}</span>
-          <span className="meta-divider" />
-          <span>{blog.publishedAt}</span>
-          <span className="meta-divider" />
-          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}>
-            <Clock size={13} />
-            {blog.readTime}
-          </span>
-        </div>
-
         <h2 className="card-title">{blog.title}</h2>
 
         <p className="card-excerpt">{blog.subtitle}</p>

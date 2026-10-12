@@ -368,11 +368,6 @@ export default function BlogDetailPage({
                   style={{ cursor: 'pointer' }}
                 >
                   <div className="card-body">
-                    <div className="card-meta-top">
-                      <span className="card-category-inline">{rel.category}</span>
-                      <span className="meta-divider" />
-                      <span>{rel.readTime}</span>
-                    </div>
                     <h3 className="card-title" style={{ fontSize: '1.1rem' }}>{rel.title}</h3>
                     <p className="card-excerpt" style={{ fontSize: '0.85rem' }}>{rel.subtitle}</p>
                   </div>
